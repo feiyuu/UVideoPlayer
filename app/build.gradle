@@ -29,8 +29,8 @@ allprojects {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation project(':uvideoplayer')
-
+    //implementation project(':uvideoplayer')
+    implementation 'com.github.feiyuu:UVideoPlayer:1.0.1'
     implementation 'com.android.support:multidex:1.0.1'
 
 }

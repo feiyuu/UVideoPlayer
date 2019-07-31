@@ -902,7 +902,6 @@ public class UniversalVideoView extends SurfaceView
     }
 */
 
-
     public interface VideoViewCallback {
         void onScaleChange(boolean isFullscreen);
 

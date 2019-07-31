@@ -7,12 +7,7 @@ import android.view.MotionEvent;
 import android.widget.SeekBar;
 
 /**
- * @author hwj 2019/1/11
- * @Package com.minminaya.mediaservice
- * @Title: noClickSeekbar
- * @Description: (用一句话描述该文件做什么)
- * Copyright (c) 浙江传化陆鲸科技有限公司版权所有
- * Create DateTime: 2019/1/11
+ * @author feiyu 2019/1/11
  */
 public class NoClickSeekBar extends SeekBar implements SeekBar.OnSeekBarChangeListener {
 

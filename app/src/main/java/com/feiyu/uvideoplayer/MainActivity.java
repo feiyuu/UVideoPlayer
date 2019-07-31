@@ -3,10 +3,8 @@ package com.feiyu.uvideoplayer;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.SeekBar;
 
 import java.util.ArrayList;
@@ -34,7 +32,6 @@ public class MainActivity extends AppCompatActivity implements UniversalVideoVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         urls.add(VIDEO_URL_02);
         urls.add(VIDEO_URL_03);
         urls.add(VIDEO_URL_04);
@@ -49,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements UniversalVideoVie
         setVideoAreaSize();
         mVideoView.setVideoViewCallback(this);
 
+        //进度回调
         mMediaController.setProgressChangedCallback(new UniversalMediaController.ValidateSeekBarCallBack() {
 
             @Override
@@ -59,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements UniversalVideoVie
             }
         });
 
+        //下一个视频
         txt_next.setOnClickListener(new View.OnClickListener() {
             int i = 0;
 
@@ -104,10 +103,11 @@ public class MainActivity extends AppCompatActivity implements UniversalVideoVie
             mVideoLayout.setLayoutParams(layoutParams);
         }
 
-        switchTitleBar(!isFullscreen);
+        switchActionBar(!isFullscreen);
     }
 
-    private void switchTitleBar(boolean show) {
+    private void switchActionBar(boolean show) {
+
         android.support.v7.app.ActionBar supportActionBar = getSupportActionBar();
         if (supportActionBar != null) {
             if (show) {
