@@ -9,6 +9,8 @@ https://blog.csdn.net/m0_38058826/article/details/88350846
 视频播放播放，原生mediaplayer和ijkplayer
 https://blog.csdn.net/m0_38058826/article/details/88239127
 
+项目引入：
+
 Step1. Add it in your root build.gradle at the end of repositories:
 
 	allprojects {
@@ -20,7 +22,7 @@ Step1. Add it in your root build.gradle at the end of repositories:
 Step 2. Add the dependency
 
 	dependencies {
-	        implementation 'com.github.feiyuu:UVideoPlayer:Tag'
+	        implementation 'com.github.feiyuu:UVideoPlayer:Tag'//1.0.1
 	}
 
 使用代码详见demo
