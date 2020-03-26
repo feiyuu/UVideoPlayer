@@ -20,6 +20,7 @@ package com.feiyu.uvideoplayer;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
+import android.content.res.AssetFileDescriptor;
 import android.content.res.TypedArray;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -91,6 +92,7 @@ public class UniversalVideoView extends SurfaceView
     private OrientationDetector mOrientationDetector;
     private VideoViewCallback videoViewCallback;
     private boolean mIsPause;
+    private int mResId;
 
     public UniversalVideoView(Context context) {
         this(context, null);
@@ -286,6 +288,13 @@ public class UniversalVideoView extends SurfaceView
         invalidate();
     }
 
+    public void setVideoResId(int resId) {
+        mResId = resId;
+        mSeekWhenPrepared = 0;
+        openVideo();
+        requestLayout();
+        invalidate();
+    }
 
     public void stopPlayback() {
         if (mMediaPlayer != null) {
@@ -298,7 +307,7 @@ public class UniversalVideoView extends SurfaceView
     }
 
     private void openVideo() {
-        if (mUri == null || mSurfaceHolder == null) {
+        if ((mUri == null && mResId == 0) || mSurfaceHolder == null) {
             // not ready for playback just yet, will try again later
             return;
         }
@@ -309,7 +318,13 @@ public class UniversalVideoView extends SurfaceView
         // called start() previously
         release(false);
         try {
+
             mMediaPlayer = new MediaPlayer();
+            if (mUri != null) {
+            } else if (mResId != 0) {
+                AssetFileDescriptor afd = getResources().openRawResourceFd(mResId);
+                mMediaPlayer.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
+            }
             mPreparedBeforeStart = false;
             if (mAudioSession != 0) {
                 mMediaPlayer.setAudioSessionId(mAudioSession);
@@ -324,7 +339,9 @@ public class UniversalVideoView extends SurfaceView
             mMediaPlayer.setOnInfoListener(mInfoListener);
             mMediaPlayer.setOnBufferingUpdateListener(mBufferingUpdateListener);
             mCurrentBufferPercentage = 0;
-            mMediaPlayer.setDataSource(mContext, mUri);
+            if (null != mUri) {
+                mMediaPlayer.setDataSource(mContext, mUri);
+            }
             mMediaPlayer.setDisplay(mSurfaceHolder);
             mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
             mMediaPlayer.setScreenOnWhilePlaying(true);
