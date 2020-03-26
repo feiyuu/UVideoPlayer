@@ -22,7 +22,6 @@ Step1. Add it in your root build.gradle at the end of repositories:
 Step 2. Add the dependency
 
 	dependencies {
-	        implementation 'com.github.feiyuu:UVideoPlayer:Tag'//1.0.1
-	}
+	        implementation 'com.github.feiyuu:UVideoPlayer:1.0.2'
 
 使用代码详见demo
